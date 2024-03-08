@@ -1,4 +1,5 @@
-﻿using BankingLocalMaui.Services;
+﻿using BankingLocalMaui.Models;
+using BankingLocalMaui.Services;
 
 namespace BankingLocalMaui
 {
@@ -15,6 +16,11 @@ namespace BankingLocalMaui
 
         private void OnCounterClicked(object sender, EventArgs e)
         {
+
+            List<Client> clientsList = _database.GetAllClients();
+            List<Transaction> transactionsList = _database.GetAllTransactions();
+            Client client2 = _database.GetClientById(2); 
+
             count++;
 
             if (count == 1)

@@ -1,11 +1,5 @@
 ﻿using SQLite;
 using SQLiteNetExtensions.Attributes;
-using System;
-using System.Collections.Generic;
-//using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BankingLocalMaui.Models
 {
@@ -25,13 +19,21 @@ namespace BankingLocalMaui.Models
         public int ClientTypeId { get; set; }
 
         [OneToOne]
-        public ClientType ClientType { get; set; }
+        public ClientType ClientType { get; set; } //if you query this table it will populate the client type description/ instead of just having the id you'll have what the ID references
 
         [ForeignKey(typeof(Bank))]
         public int BankId { get; set; }
 
         [ManyToOne] // **these statements are not needed 
         public Bank Bank { get; set; } // **these statements are not needed
+
+        [OneToMany(CascadeOperations =CascadeOperation.All)]
+        public List<BankAccount> BankAccounts { get; set; }
+
+        public Client() //constructor to create an instance of bank account
+        {
+            BankAccounts = new();
+        }
 
     }
 }
